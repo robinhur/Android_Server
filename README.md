@@ -20,10 +20,12 @@
 # 개발 환경
 ### Desktop
   - Intel Xeon E3-1230 V2 3.3GHz | 8GB RAM | Windows 10 Pro
-  - 128GB SSD + 1TB HDD
+  - 128GB SSD + 1TB HDD  
+  
 ### Laptop
   - Intel Core i5-6200U 2.3GHz | 8GB RAM | Windows 10 Pro
-  - 256GB SSD
+  - 256GB SSD  
+  
 ### IDE
   - Eclipse IDE for Java (Ver. 4.6.0 - Neon)
   - Android Studio       (Ver. 2.1.2)
