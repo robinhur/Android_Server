@@ -1,4 +1,4 @@
-package com.huza.enhanced_socket_server;
+package com.huza.echo_server;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

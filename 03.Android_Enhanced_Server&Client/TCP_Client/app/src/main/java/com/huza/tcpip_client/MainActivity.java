@@ -1,13 +1,16 @@
-package com.huza.enhanced_socket_server;
+package com.huza.tcpip_client;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.huza.enhanced_socket_server.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,6 +20,7 @@ import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private BufferedReader networkReader;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (client != null)
+            client.quit();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -46,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
         final EditText et = (EditText) findViewById(R.id.editText3);
 
         connect = (Button) findViewById(R.id.btn_connect);
-        finish = (Button) findViewById(R.id.btn_connect);
-        start = (Button) findViewById(R.id.btn_connect);
+        finish = (Button) findViewById(R.id.btn_disconnect);
+        start = (Button) findViewById(R.id.btn_send);
         text = (TextView) findViewById(R.id.textView1);
 
+        Log.d("TCPIP Client", "1");
         connect.setEnabled(true);
         finish.setEnabled(false);
         start.setEnabled(false);
@@ -88,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     }.start();
 
                     text.setText("TCP/IP disconnected");
+                    Log.d("TCPIP Client", "2");
                     connect.setEnabled(true);
                     finish.setEnabled(false);
                     start.setEnabled(false);
@@ -115,12 +129,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class TCPClient extends Thread{
+    class TCPClient extends Thread{
 
-        private final InetSocketAddress socketAddress;
-        private int connection_timeout = 3000;
-        private boolean loop;
-        private String line;
+        Boolean loop;
+        SocketAddress socketAddress;
+        String line;
+        private final int connection_timeout = 3000;
 
         public TCPClient(String ip, int port) {
             socketAddress = new InetSocketAddress(ip, port);
@@ -142,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         text.setText("Server connected");
+                        Log.d("TCPIP Client", "3");
                         connect.setEnabled(false);
                         finish.setEnabled(true);
                         start.setEnabled(true);
@@ -177,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 text.setText("Connection disconnected from unknown problem");
+                                Log.d("TCPIP Client", "4");
                                 connect.setEnabled(true);
                                 finish.setEnabled(false);
                                 start.setEnabled(false);
@@ -211,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             text.setText("Server closed");
+                            Log.d("TCPIP Client", "5");
                             connect.setEnabled(true);
                             finish.setEnabled(false);
                             start.setEnabled(false);

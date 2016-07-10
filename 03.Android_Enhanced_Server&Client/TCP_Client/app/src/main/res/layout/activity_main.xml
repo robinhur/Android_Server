@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.huza.enhanced_socket_server.MainActivity">
+    tools:context="com.huza.tcpip_client.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,21 +76,21 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Coonnect"
+            android:text="Conn."
             android:id="@+id/btn_connect" />
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="disconnect"
+            android:text="disconn."
             android:id="@+id/btn_disconnect"/>
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Send"
+            android:text="send"
             android:id="@+id/btn_send" />
     </LinearLayout>
 
